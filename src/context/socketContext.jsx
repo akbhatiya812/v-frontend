@@ -35,10 +35,10 @@ export const SocketProvider = ({ children }) => {
 
   useEffect(() => {
     console.log(roomKey);
-    socket.on("joined-room", ({ joinedRoom, flag }) => {
-      console.log("new room joined", joinedRoom);
-      setRoomId(joinedRoom);
-      setIsWaiting(flag);
+    socket.on("joined-room", (x) => {
+      console.log("new room joined", x.roomKey);
+      setRoomId(x.roomKey);
+      setIsWaiting(x.flag);
     });
     socket.on("user-disconnected", ({ disconnectedUser }) => {
       socket.emit("leave-room", roomId);
