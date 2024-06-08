@@ -1,0 +1,8 @@
+
+.cont::-webkit-scrollbar{
+    width: 3px;
+}
+
+.cont::-webkit-scrollbar-thumb{
+    background-color: #ddd;
+}

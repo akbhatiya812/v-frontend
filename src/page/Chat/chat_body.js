@@ -1,15 +1,16 @@
 import React from "react";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { Usecustem } from "../../context/chat";
 import MessegeMenu from "./message";
 import { useSocket } from "../../context/socketContext";
+import style from './chatStyles.module.css';
 
 function ChatBody() {
   const index = [1];
   const { usemsg, setUsemsg, isDarkMode } = Usecustem();
   const img = [];
   const video = [];
-
+  const containerRef = useRef(null);
   const { socket, roomId } = useSocket();
   console.log("room Id here", roomId);
 
@@ -26,12 +27,23 @@ function ChatBody() {
     };
   }, [socket]);
 
+  const scrollToBottom = () => {
+    if (containerRef.current) {
+      containerRef.current.scrollTop = containerRef.current.scrollHeight;
+    }
+  };
+  useEffect(() => {
+    console.log("herere")
+    scrollToBottom();
+  }, [usemsg]);
+
   return (
-    <div className="mt-5 h-[calc(100vh-215px)] md:h-[calc(100vh-255px)] overflow-y-auto ">
-      <div className="flex gap-[24px] justify-start  ">
+    <div  className={`mt-5 h-[calc(100vh-215px)] md:h-[calc(100vh-255px)] overflow-y-auto ${style.cont}`}  ref={containerRef}>
+      <div className="flex gap-[24px] justify-start  " >
         <div
           className="flex flex-col items-start gap-2 chatfastchilder-left"
           style={{ width: "100%" }}
+          
         >
           {usemsg?.map((msg, key) => {
             return (
