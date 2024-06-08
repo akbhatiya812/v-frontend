@@ -21,6 +21,8 @@ export const SocketProvider = ({ children }) => {
   const navigate = useNavigate();
   const [isWaiting, setIsWaiting] = useState();
 
+  const [roomKey, setRoomKey] = useState();
+
   const socket = useMemo(
     () =>
       io(process.env.REACT_APP_SOCKET_API_BASE_URL, { withCredentials: true }),
@@ -32,6 +34,7 @@ export const SocketProvider = ({ children }) => {
   });
 
   useEffect(() => {
+    console.log(roomKey);
     socket.on("joined-room", ({ joinedRoom, flag }) => {
       console.log("new room joined", joinedRoom);
       setRoomId(joinedRoom);
@@ -60,9 +63,19 @@ export const SocketProvider = ({ children }) => {
     };
   }, [socket]); 
 
+  // useEffect(() => {
+  //   if(roomKey){
+  //     // console.log(roomKey);
+  //     joinRandomRoom();
+  //   }
+  // },  [roomKey])
+
   const joinRandomRoom = () => {
-    const roomKey = uuidv4();
-    socket.emit("join-room", roomKey);
+    // const roomKey = uuidv4();
+    if(roomKey){
+      console.log("here",roomKey);
+      socket.emit("join-room", roomKey);
+    }
   };
 
   const handleExitChat = () => {
@@ -81,6 +94,8 @@ export const SocketProvider = ({ children }) => {
     setIsWaiting,
     joinRandomRoom,
     handleExitChat,
+    setRoomKey,
+    roomKey
   };
   return (
     <socketContext.Provider value={value}>{children}</socketContext.Provider>
