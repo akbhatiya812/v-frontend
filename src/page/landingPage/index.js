@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 import { Usecustem } from "../../context/chat";
 
 function Landing() {
-  const { joinRandomRoom } = useSocket();
+  const { setRoomKey , roomKey,joinRandomRoom} = useSocket();
   const { isDarkMode } = Usecustem();
 
   return (
@@ -39,6 +39,7 @@ function Landing() {
             >
               Video call with random
             </Link>
+            <input placeholder="Enter the room key here" type="text" value={roomKey} onChange={(e) => setRoomKey(e.target.value)} style={{padding:"10px 20px",outline:"none"}} />
             <Link
               to={"/chat"}
               onClick={joinRandomRoom}

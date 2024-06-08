@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import ChatHeader from "./chat_header";
 import ChatBody from "./chat_body";
 import ChatFooter from "./chat_footer";
@@ -9,6 +9,11 @@ import { Usecustem } from "../../context/chat";
 function Chat() {
   const { isWaiting } = useSocket();
   const { isDarkMode } = Usecustem();
+
+  // useEffect(() => {
+  //   let room = prompt("Type Password here");
+  //   setRoomKey(room);
+  // },[]);
 
   return (
     <>
