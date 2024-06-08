@@ -49,7 +49,7 @@ function ChatBody() {
             return (
               <div
                 key={key}
-                style={{ marginLeft: msg.fromServer === true ? "0" : "auto" }}
+                style={{ marginLeft:  "0" }}
               >
                 <div>
                   <h5
