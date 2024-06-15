@@ -34,7 +34,7 @@ function ChatBody() {
         console.log("jere")
         new Notification("Chat Application", {
           body: "New Message received",
-          icon: '/path/to/icon.png' // Optional: Add an icon
+          icon: 'https://www.pinclipart.com/picdir/big/369-3699390_notification-png-notification-icon-png-free-clipart.png' // Optional: Add an icon
         });
       }
       setUsemsg((prevMessages) => [
