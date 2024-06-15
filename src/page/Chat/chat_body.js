@@ -34,7 +34,7 @@ function ChatBody() {
         console.log("jere")
         new Notification("Chat Application", {
           body: "New Message received",
-          // icon: '/path/to/icon.png' // Optional: Add an icon
+          icon: '/path/to/icon.png' // Optional: Add an icon
         });
       }
       setUsemsg((prevMessages) => [
