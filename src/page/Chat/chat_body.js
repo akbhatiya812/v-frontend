@@ -4,6 +4,9 @@ import { Usecustem } from "../../context/chat";
 import MessegeMenu from "./message";
 import { useSocket } from "../../context/socketContext";
 import style from './chatStyles.module.css';
+import { useWebNotification } from 'react-web-notification';
+import uuid from 'uuid';
+
 
 function ChatBody() {
   const index = [1];
@@ -13,9 +16,21 @@ function ChatBody() {
   const containerRef = useRef(null);
   const { socket, roomId } = useSocket();
   console.log("room Id here", roomId);
+  const { showNotification } = useWebNotification();
 
   useEffect(() => {
     const handleMessage = (message) => {
+    
+      const notificationId = uuid.v4();
+      showNotification({
+        title: "New Message in Chat App",
+        silent: false,
+        onClick: () => { console.log('Notification clicked'); },
+        onClose: () => { console.log('Notification closed'); },
+        onError: (err) => { console.error('Notification error:', err); },
+      }, () => { console.log('Notification shown'); }, notificationId);
+
+
       setUsemsg((prevMessages) => [
         ...prevMessages,
         { msgValue: message, fromServer: true },
