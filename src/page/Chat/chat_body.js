@@ -4,8 +4,6 @@ import { Usecustem } from "../../context/chat";
 import MessegeMenu from "./message";
 import { useSocket } from "../../context/socketContext";
 import style from './chatStyles.module.css';
-import { useWebNotification } from 'react-web-notification';
-import uuid from 'uuid';
 
 
 function ChatBody() {
@@ -16,21 +14,29 @@ function ChatBody() {
   const containerRef = useRef(null);
   const { socket, roomId } = useSocket();
   console.log("room Id here", roomId);
-  const { showNotification } = useWebNotification();
 
+   useEffect(() => {
+    if ("Notification" in window && Notification.permission === "default") {
+      Notification.requestPermission().then(permission => {
+        if (permission === "granted") {
+          console.log("Notification permission granted.");
+        } else {
+          console.log("Notification permission denied.");
+        }
+      });
+    }
+  }, []);
+  
   useEffect(() => {
     const handleMessage = (message) => {
     
-      const notificationId = uuid.v4();
-      showNotification({
-        title: "New Message in Chat App",
-        silent: false,
-        onClick: () => { console.log('Notification clicked'); },
-        onClose: () => { console.log('Notification closed'); },
-        onError: (err) => { console.error('Notification error:', err); },
-      }, () => { console.log('Notification shown'); }, notificationId);
-
-
+      if (document.hidden && "Notification" in window && Notification.permission === "granted") {
+        console.log("jere")
+        new Notification("Chat Application", {
+          body: "New Message received",
+          // icon: '/path/to/icon.png' // Optional: Add an icon
+        });
+      }
       setUsemsg((prevMessages) => [
         ...prevMessages,
         { msgValue: message, fromServer: true },
