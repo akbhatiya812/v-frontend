@@ -122,7 +122,7 @@ body {
 }
 
 .bg {
-  background-image: url("../public/images/Landingbg.png");
+  background-color: #fff;
   min-height: 100vh;
   background-position: center;
   background-size: cover;
@@ -131,7 +131,7 @@ body {
 }
 
 .bg-dark {
-  background-image: url("../public/images/download.png");
+  background-color: #3c3c3c;
   min-height: 100vh;
   background-position: center;
   background-size: cover;
@@ -398,7 +398,7 @@ body {
 }
 
 .wallpaper {
-  background-image: url("../public/images/download.png");
+  background-color: #3c3c3c;
   min-height: 100vh;
   background-position: center;
   background-size: cover;
