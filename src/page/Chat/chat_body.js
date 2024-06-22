@@ -72,7 +72,7 @@ function ChatBody() {
                 key={key}
                 style={{ marginLeft:  "0" }}
               >
-                <div>
+                <div style={{maxWidth:"50vw"}}>
                   <h5
 
                     className={` flex relative gap-2  ${isDarkMode ? "bg-[#356532] text-white" : 'bg-[#e5edf5]'} text-[#223645] ${msg.fromServer === false ? 'rounded-tr-none' : 'rounded-tl-none'} rounded-lg  font-[600] p-[16px_20px] w-[max-content] group`}
